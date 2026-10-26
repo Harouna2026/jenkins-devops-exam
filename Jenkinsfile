@@ -64,12 +64,12 @@ stages {
       sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
         helm upgrade --install app-movie movie-service --values=values.yml --namespace dev \
         --set image.repository="${DOCKER_ID}/${DOCKER_IMAGE1}" \
-        --set image.tag="${DOCKER_TAG }" \
+        --set image.tag="${DOCKER_TAG}" \
         --set service.nodePort=8001
 
          helm upgrade --install app-cast cast-service --values=values.yml --namespace dev \
         --set image.repository="${DOCKER_ID}/${DOCKER_IMAGE1}" \
-        --set image.tag="${DOCKER_TAG }" \
+        --set image.tag="${DOCKER_TAG}" \
         --set service.nodePort=8002
       '''
       }
@@ -96,7 +96,7 @@ stages {
 
          helm upgrade --install app-cast cast-service --values=values.yml --namespace staging \
         --set image.repository="${DOCKER_ID}/${DOCKER_IMAGE1}" \
-        --set image.tag="${DOCKER_TAG }" \
+        --set image.tag="${DOCKER_TAG}" \
         --set service.nodePort=8002
       '''
       }
@@ -123,7 +123,7 @@ stages {
 
          helm upgrade --install app-cast cast-service --values=values.yml --namespace qa \
         --set image.repository="${DOCKER_ID}/${DOCKER_IMAGE1}" \
-        --set image.tag="${DOCKER_TAG }" \
+        --set image.tag="${DOCKER_TAG}" \
         --set service.nodePort=8002
       '''
       }
@@ -154,7 +154,7 @@ stages {
             --set service.nodePort=8001
           helm upgrade --install app-cast cast-service --values=values.yml --namespace prod \
             --set image.repository="${DOCKER_ID}/${DOCKER_IMAGE1}" \
-            --set image.tag="${DOCKER_TAG }" \
+            --set image.tag="${DOCKER_TAG}" \
             --set service.nodePort=8002
           '''
         }
