@@ -12,7 +12,7 @@ stages {
       script {
       sh '''
         docker rm -f jenkins
-        docker compose build -t $DOCKER_ID/$DOCKER_IMAGE1:$DOCKER_TAG .
+        docker build -t $DOCKER_ID/$DOCKER_IMAGE1:$DOCKER_TAG .
       sleep 6
       '''
       }
@@ -23,7 +23,7 @@ stages {
       script {
       sh '''
         docker rm -f jenkins
-        docker compose build -t $DOCKER_ID/$DOCKER_IMAGE2:$DOCKER_TAG .
+        docker build -t $DOCKER_ID/$DOCKER_IMAGE2:$DOCKER_TAG .
       sleep 6
       '''
       }
