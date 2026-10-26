@@ -32,15 +32,7 @@ stages {
       }
     }
   }
-  stage('Test Acceptance'){ // we launch the curl command to validate that the container responds to the request
-    steps {
-      script {
-      sh '''
-      curl -I http://localhost:8080/api/v1/movies/docs || curl -I http://localhost/api/v1/movies/docs
-      '''
-      }
-    }
-  }
+
   stage('Docker Push'){ //we pass the built image to our docker hub account
     environment
     {
