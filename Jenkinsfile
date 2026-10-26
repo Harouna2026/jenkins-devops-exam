@@ -62,12 +62,12 @@ stages {
       cp charts/values.yaml values.yml
       cat values.yml
       sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
-        helm upgrade --install app-movie movie-service --values=values.yml --namespace dev \
+        helm upgrade --install app-movie charts --values=values.yml --namespace dev \
         --set image.repository="${DOCKER_ID}/${DOCKER_IMAGE1}" \
         --set image.tag="${DOCKER_TAG}" \
         --set service.nodePort=8001
 
-         helm upgrade --install app-cast cast-service --values=values.yml --namespace dev \
+         helm upgrade --install app-cast charts --values=values.yml --namespace dev \
         --set image.repository="${DOCKER_ID}/${DOCKER_IMAGE1}" \
         --set image.tag="${DOCKER_TAG}" \
         --set service.nodePort=8002
@@ -89,12 +89,12 @@ stages {
       cp charts/values.yaml values.yml
       cat values.yml
       sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
-      helm upgrade --install app-movie movie-service --values=values.yml --namespace staging \
+      helm upgrade --install app-movie charts --values=values.yml --namespace staging \
         --set image.repository="${DOCKER_ID}/${DOCKER_IMAGE1}" \
         --set image.tag="${DOCKER_TAG }" \
         --set service.nodePort=8001
 
-         helm upgrade --install app-cast cast-service --values=values.yml --namespace staging \
+         helm upgrade --install app-cast charts --values=values.yml --namespace staging \
         --set image.repository="${DOCKER_ID}/${DOCKER_IMAGE1}" \
         --set image.tag="${DOCKER_TAG}" \
         --set service.nodePort=8002
@@ -116,12 +116,12 @@ stages {
       cp charts/values.yaml values.yml
       cat values.yml
       sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
-      helm upgrade --install app-movie movie-service --values=values.yml --namespace qa \
+      helm upgrade --install app-movie charts --values=values.yml --namespace qa \
         --set image.repository="${DOCKER_ID}/${DOCKER_IMAGE1}" \
         --set image.tag="${DOCKER_TAG }" \
         --set service.nodePort=8001
 
-         helm upgrade --install app-cast cast-service --values=values.yml --namespace qa \
+         helm upgrade --install app-cast charts --values=values.yml --namespace qa \
         --set image.repository="${DOCKER_ID}/${DOCKER_IMAGE1}" \
         --set image.tag="${DOCKER_TAG}" \
         --set service.nodePort=8002
@@ -148,11 +148,11 @@ stages {
           cp charts/values.yaml values.yml
           cat values.yml
           sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
-          helm upgrade --install app-movie movie-service --values=values.yml --namespace prod \
+          helm upgrade --install app-movie charts --values=values.yml --namespace prod \
             --set image.repository="${DOCKER_ID}/${DOCKER_IMAGE1}" \
             --set image.tag="${DOCKER_TAG }" \
             --set service.nodePort=8001
-          helm upgrade --install app-cast cast-service --values=values.yml --namespace prod \
+          helm upgrade --install app-cast charts --values=values.yml --namespace prod \
             --set image.repository="${DOCKER_ID}/${DOCKER_IMAGE1}" \
             --set image.tag="${DOCKER_TAG}" \
             --set service.nodePort=8002
