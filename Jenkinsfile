@@ -118,7 +118,7 @@ stages {
       #sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
       helm upgrade --install app-movie charts --values=values.yml --namespace qa \
         --set image.repository="${DOCKER_ID}/${DOCKER_IMAGE1}" \
-        --set image.tag="${DOCKER_TAG }" \
+        --set image.tag="${DOCKER_TAG}" \
         --set service.nodePort=30005
 
          helm upgrade --install app-cast charts --values=values.yml --namespace qa \
@@ -150,7 +150,7 @@ stages {
           #sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
           helm upgrade --install app-movie charts --values=values.yml --namespace prod \
             --set image.repository="${DOCKER_ID}/${DOCKER_IMAGE1}" \
-            --set image.tag="${DOCKER_TAG }" \
+            --set image.tag="${DOCKER_TAG}" \
             --set service.nodePort=30007
           helm upgrade --install app-cast charts --values=values.yml --namespace prod \
             --set image.repository="${DOCKER_ID}/${DOCKER_IMAGE1}" \
