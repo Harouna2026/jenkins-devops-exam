@@ -92,12 +92,12 @@ stages {
       helm upgrade --install app-movie movie-service --values=values.yml --namespace staging \
         --set image.repository="${DOCKER_ID}/${DOCKER_IMAGE1}" \
         --set image.tag="${DOCKER_TAG }" \
-        --set service.nodePort=30001
+        --set service.nodePort=30003
 
          helm upgrade --install app-cast charts --values=values.yml --namespace staging \
         --set image.repository="${DOCKER_ID}/${DOCKER_IMAGE1}" \
         --set image.tag="${DOCKER_TAG}" \
-        --set service.nodePort=30002
+        --set service.nodePort=30004
       '''
       }
     }
@@ -119,12 +119,12 @@ stages {
       helm upgrade --install app-movie movie-service --values=values.yml --namespace qa \
         --set image.repository="${DOCKER_ID}/${DOCKER_IMAGE1}" \
         --set image.tag="${DOCKER_TAG }" \
-        --set service.nodePort=30001
+        --set service.nodePort=30005
 
          helm upgrade --install app-cast charts --values=values.yml --namespace qa \
         --set image.repository="${DOCKER_ID}/${DOCKER_IMAGE1}" \
         --set image.tag="${DOCKER_TAG}" \
-        --set service.nodePort=30002
+        --set service.nodePort=30006
       '''
       }
     }
@@ -151,11 +151,11 @@ stages {
           helm upgrade --install app-movie movie-service --values=values.yml --namespace prod \
             --set image.repository="${DOCKER_ID}/${DOCKER_IMAGE1}" \
             --set image.tag="${DOCKER_TAG }" \
-            --set service.nodePort=30001
+            --set service.nodePort=30007
           helm upgrade --install app-cast charts --values=values.yml --namespace prod \
             --set image.repository="${DOCKER_ID}/${DOCKER_IMAGE1}" \
             --set image.tag="${DOCKER_TAG}" \
-            --set service.nodePort=30002
+            --set service.nodePort=30008
           '''
         }
       }
