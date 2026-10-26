@@ -12,23 +12,14 @@ stages {
       script {
       sh '''
         docker rm -f jenkins
-        docker build -t $DOCKER_ID/$DOCKER_IMAGE1:$DOCKER_TAG .
+        export VERSION="${DOCKER_TAG}"
+        docker compose build 
       sleep 6
       '''
       }
     }
   }
-    stage(' Docker Build cast-service'){ // docker build image stage
-    steps {
-      script {
-      sh '''
-        docker rm -f jenkins
-        docker build -t $DOCKER_ID/$DOCKER_IMAGE2:$DOCKER_TAG .
-      sleep 6
-      '''
-      }
-    }
-  }
+ 
  
   stage(' Docker run'){ // docker build image stage
     steps {
