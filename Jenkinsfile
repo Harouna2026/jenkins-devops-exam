@@ -7,7 +7,7 @@ DOCKER_TAG = "v.${BUILD_ID}.0" // we will tag our images with the current build 
 }
 agent any // Jenkins will be able to select all available agents
 stages {
-  stage(' Docker Build movie-service'){ // docker build image stage
+  stage(' Docker Build'){ // docker build image stage
     steps {
       script {
       sh '''
@@ -26,7 +26,7 @@ stages {
       script {
       sh '''
         docker rm -f jenkins
-        docker compose up -d .
+        docker compose up -d 
       sleep 6
       '''
       }
@@ -50,7 +50,8 @@ stages {
       script {
         sh '''
         docker login -u $DOCKER_ID -p $DOCKER_PASS
-        docker push $DOCKER_ID/$DOCKER_IMAGE:$DOCKER_TAG
+        export VERSION="${DOCKER_TAG}"
+        docker compose push
         '''
       }
     }
@@ -102,6 +103,33 @@ stages {
         --set service.nodePort=8001
 
          helm upgrade --install app-cast cast-service --values=values.yml --namespace staging \
+        --set image.repository="${DOCKER_ID}/${DOCKER_IMAGE1}" \
+        --set image.tag="${DOCKER_TAG }" \
+        --set service.nodePort=8002
+      '''
+      }
+    }
+  }
+    stage('Deploiement en qa'){
+    environment {
+    KUBECONFIG = credentials("config") // we retrieve  kubeconfig from secret file called config saved on jenkins
+    }
+    steps {
+      script {
+      sh '''
+      rm -Rf ~/.kube/
+      mkdir ~/.kube/
+      ls
+      cat $KUBECONFIG > ~/.kube/config
+      cp charts/values.yaml values.yml
+      cat values.yml
+      sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
+      helm upgrade --install app-movie movie-service --values=values.yml --namespace qa \
+        --set image.repository="${DOCKER_ID}/${DOCKER_IMAGE1}" \
+        --set image.tag="${DOCKER_TAG }" \
+        --set service.nodePort=8001
+
+         helm upgrade --install app-cast cast-service --values=values.yml --namespace qa \
         --set image.repository="${DOCKER_ID}/${DOCKER_IMAGE1}" \
         --set image.tag="${DOCKER_TAG }" \
         --set service.nodePort=8002
