@@ -88,7 +88,7 @@ stages {
       cat $KUBECONFIG > ~/.kube/config
       cp charts/values.yaml values.yml
       cat values.yml
-      sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
+      # sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
       helm upgrade --install app-movie movie-service --values=values.yml --namespace staging \
         --set image.repository="${DOCKER_ID}/${DOCKER_IMAGE1}" \
         --set image.tag="${DOCKER_TAG }" \
@@ -115,7 +115,7 @@ stages {
       cat $KUBECONFIG > ~/.kube/config
       cp charts/values.yaml values.yml
       cat values.yml
-      sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
+      #sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
       helm upgrade --install app-movie movie-service --values=values.yml --namespace qa \
         --set image.repository="${DOCKER_ID}/${DOCKER_IMAGE1}" \
         --set image.tag="${DOCKER_TAG }" \
@@ -147,7 +147,7 @@ stages {
           cat $KUBECONFIG > ~/.kube/config
           cp charts/values.yaml values.yml
           cat values.yml
-          sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
+          #sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
           helm upgrade --install app-movie movie-service --values=values.yml --namespace prod \
             --set image.repository="${DOCKER_ID}/${DOCKER_IMAGE1}" \
             --set image.tag="${DOCKER_TAG }" \
